@@ -9,21 +9,21 @@ public class AdapterPattern {
         final Square square = new Square();
         final Circle circle = new Circle();
 
-        Shape newTriangle = new Shape(new Drawable() {
+        Shape newTriangle = new Shape(new Shape.Drawable() {
             @Override
             public void draw() {
                 triangle.drawTriangle();
             }
         });
 
-        Shape newSquare = new Shape(new Drawable() {
+        Shape newSquare = new Shape(new Shape.Drawable() {
             @Override
             public void draw() {
                 square.drawSquare();
             }
         });
 
-        Shape newCircle = new Shape(new Drawable() {
+        Shape newCircle = new Shape(new Shape.Drawable() {
             @Override
             public void draw() {
                 circle.drawCircle();
@@ -36,18 +36,7 @@ public class AdapterPattern {
 
     }
 
-    static class Shape {
 
-        private Drawable mShape;
-
-        Shape(Drawable shape) {
-            mShape = shape;
-        }
-
-        void draw() {
-            mShape.draw();
-        }
-    }
 
     static class Triangle {
         void drawTriangle() {
@@ -66,10 +55,20 @@ public class AdapterPattern {
             System.out.println("Drawing square");
         }
     }
+}
 
-    /**
-     * normally it has to be a part of class Shape
-     */
+class Shape {
+
+    private Drawable mShape;
+
+    Shape(Drawable shape) {
+        mShape = shape;
+    }
+
+    void draw() {
+        mShape.draw();
+    }
+
     interface Drawable {
         void draw();
     }
