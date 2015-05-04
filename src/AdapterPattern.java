@@ -5,38 +5,72 @@ public class AdapterPattern {
 
     public static void main(String... args) {
 
+        final Triangle triangle = new Triangle();
+        final Square square = new Square();
+        final Circle circle = new Circle();
+
+        Shape newTriangle = new Shape(new Drawable() {
+            @Override
+            public void draw() {
+                triangle.drawTriangle();
+            }
+        });
+
+        Shape newSquare = new Shape(new Drawable() {
+            @Override
+            public void draw() {
+                square.drawSquare();
+            }
+        });
+
+        Shape newCircle = new Shape(new Drawable() {
+            @Override
+            public void draw() {
+                circle.drawCircle();
+            }
+        });
+
+        newTriangle.draw();
+        newSquare.draw();
+        newCircle.draw();
+
     }
 
-    class Shape {
+    static class Shape {
 
-        Shape() {
+        private Drawable mShape;
 
+        Shape(Drawable shape) {
+            mShape = shape;
         }
 
         void draw() {
-
-        }
-
-        interface drawable {
-            draw();
+            mShape.draw();
         }
     }
 
-    class Triangle {
+    static class Triangle {
         void drawTriangle() {
             System.out.println("Drawing triangle");
         }
     }
 
-    class Circle {
+    static class Circle {
         void drawCircle() {
             System.out.println("Drawing circle");
         }
     }
 
-    class Square {
+    static class Square {
         void drawSquare() {
             System.out.println("Drawing square");
         }
+    }
+
+    /**
+     * normally it has to be a part of class Shape
+     */
+    interface Drawable {
+        void draw();
     }
 }
